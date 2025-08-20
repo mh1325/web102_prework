@@ -27,7 +27,7 @@ The style was changed to match the sea vibe of the site.
 
 Here's a walkthrough of implemented features:
 
-<video src="assets/walkthrough.mp4" controls width="800" muted playsinline></video>
+<img src="assets/seaMonster.gif" alt="Video walkthrough" width="800"></img>
 
 
 <!-- Recommended tools:

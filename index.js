@@ -146,19 +146,26 @@ allBtn.addEventListener("click", showAllGames);
 const descriptionContainer = document.getElementById("description-container");
 
 // use filter or reduce to count the number of unfunded games
+
 const unfundedGamesCount = GAMES_JSON.filter(game => game.pledged < game.goal).length;
 
+const totalRaisedStr = totalRaised.toLocaleString();
+
+
+
+
 // create a string that explains the number of unfunded games using the ternary operator
-const totalRaisedStr=GAMES_JSON
-.reduce((sum, {pledged})=> sum + pledged, 0).toLocaleString();
+
 
 const displayStr = `A total of $${totalRaisedStr} has been raised for ${GAMES_JSON.length} games. ` +
-  `Currently, ${unfundedCount} ${unfundedCount === 1 ? "game remains" : "games remain"} unfunded. ` +
+  `Sea Monster Crowdfunding funds independent games and has been in operation for 12 years. ` +
+  `Our mission is to help indie creators bring their ideas to life through community support. ` +
+  `Currently, ${unfundedGamesCount} ${unfundedGamesCount === 1 ? "game remains" : "games remain"} unfunded. ` +
   `We need your help to fund these amazing games!`;
 
-const p =document.createElement("p");
-p.innerHTML=displayStr;
-descriptionContainer.appendChild(p);
+const p = document.createElement("p");
+p.textContent = displayStr;
+descriptionContainer.replaceChildren(p);
 
 /************************************************************************************
  * Challenge 7: Select & display the top 2 games
@@ -168,20 +175,19 @@ descriptionContainer.appendChild(p);
 const firstGameContainer = document.getElementById("first-game");
 const secondGameContainer = document.getElementById("second-game");
 
-const sortedGames =  GAMES_JSON.sort( (item1, item2) => {
-    return item2.pledged - item1.pledged;
-});
+const sortedGames = [...GAMES_JSON].sort((a, b) => b.pledged - a.pledged);
 
 
-const [top1, top2] = [...sortedGames];
+
+const [top1, top2] = sortedGames;
 // use destructuring and the spread operator to grab the first and second games
 
 // create a new element to hold the name of the top pledge game, then append it to the correct element
 const top1E = document.createElement("p");
-top1E.innerHTML = `Top Game: ${top1.name} - $${top1.pledged.toLocaleString()}`;
+top1E.textContent = `Top Game: ${top1.name} - $${top1.pledged.toLocaleString()}`;
 firstGameContainer.appendChild(top1E);
 
 // do the same for the runner up item
 const top2E = document.createElement("p");
-top2E.innerHTML = `Runner Up: ${top2.name} - $${top2.pledged.toLocaleString()}`;
+top2E.textContent = `Runner Up: ${top2.name} - $${top2.pledged.toLocaleString()}`;
 secondGameContainer.appendChild(top2E);
